@@ -1,9 +1,27 @@
 # 漢字の力 — 公開サイト
 
-iOSアプリ「漢字の力」のサポート・法務ページ。
+iOSアプリ「漢字の力」のサポート・法務ページ。GitHub Pages で公開している。
 
-- `/kanji/` サポート／プライバシーポリシー／利用規約
-- `/app-ads.txt` 広告のなりすまし対策（ドメインのルートに必要）
+| | URL |
+| --- | --- |
+| サポート | https://kanji-no-chikara.github.io/kanji/ |
+| プライバシーポリシー | https://kanji-no-chikara.github.io/kanji/privacy.html |
+| 利用規約 | https://kanji-no-chikara.github.io/kanji/terms.html |
+| app-ads.txt | https://kanji-no-chikara.github.io/app-ads.txt |
 
-法務ページの本文はアプリ側リポジトリの `App/Game/LegalText.swift` が正データで、
-`tools/legal/build_site.py` で生成している。直接編集しないこと。
+`app-ads.txt` は広告のなりすまし対策で、**ドメインのルートに置く必要がある**ためこの構成にしている。
+
+## 更新のしかた
+
+法務ページの本文は**このリポジトリで編集しない**。アプリ側リポジトリの
+`App/Game/LegalText.swift` が唯一の正データで、そこから生成する。
+
+```bash
+# アプリ側リポジトリで
+python3 tools/legal/build_site.py   # site/ を生成
+```
+
+生成された `site/` の中身をこのリポジトリへ反映する（`app-ads.txt` はルート、
+HTMLは `kanji/` 配下）。
+
+アプリ本体: https://github.com/reremo/kanji-justone
