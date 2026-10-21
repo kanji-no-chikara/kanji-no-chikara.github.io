@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["LES6ED2XUY.com.reremo.KanjiJustOne"],
+        "components": [{ "/": "/join/*", "comment": "部屋への招待リンク" }]
+      }
+    ]
+  }
+}
