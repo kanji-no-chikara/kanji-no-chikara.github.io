@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>部屋に招待されました | 漢字の力</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --board:#2C5545; --band:#24483A; --chalk:#FDFBF2; --chalkFaded:#C9D6C0;
+    --gold:#F7C948; --ink:#23261F;
+    --font:"Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--board);color:var(--chalk);font-family:var(--font);
+       display:flex;align-items:center;justify-content:center;-webkit-text-size-adjust:100%}
+  main{width:100%;max-width:420px;padding:32px 16px;text-align:center}
+  .app{font-size:15px;color:var(--chalkFaded);margin:0 0 6px}
+  h1{font-size:22px;margin:0 0 24px}
+  .label{font-size:13px;color:var(--chalkFaded);margin:0 0 8px}
+  .code{background:var(--chalk);color:var(--ink);border-radius:14px;padding:18px 0;margin:0 0 28px;
+        font:700 30px/1 ui-monospace,Menlo,monospace;letter-spacing:4px}
+  .btn{display:block;border-radius:999px;padding:16px;font-size:17px;font-weight:700;text-decoration:none;margin:0 0 12px}
+  .primary{background:var(--gold);color:var(--ink)}
+  .secondary{border:1.5px solid var(--chalkFaded);color:var(--chalk)}
+  .note{font-size:13px;color:var(--chalkFaded);line-height:1.8;margin:20px 0 0}
+</style>
+</head>
+<body>
+<main>
+  <p class="app">漢字の力</p>
+  <h1>部屋に招待されました</h1>
+  <p class="label">部屋コード</p>
+  <div class="code" id="code">------</div>
+  <a class="btn primary" id="open" href="kanjinochikara://join">アプリで開く</a>
+  <a class="btn secondary" href="https://apps.apple.com/jp/app/id6800003825">App Store で入手</a>
+  <p class="note">アプリを入れたあとは、もう一度このリンクを開くか、<br>「部屋に参加」で部屋コードを入力してください。</p>
+</main>
+<script>
+  // 部屋コードに使う字だけを残す（アプリの RoomCode.alphabet と同じ）
+  var alphabet = "ACDEFGHJKMNPQRTUVWXY2345679";
+  var raw = (new URLSearchParams(location.search).get("c") || "").toUpperCase();
+  var code = raw.split("").filter(function (ch) { return alphabet.indexOf(ch) >= 0; }).join("").slice(0, 6);
+  if (code.length === 6) {
+    document.getElementById("code").textContent = code.slice(0, 3) + " " + code.slice(3);
+    document.getElementById("open").href = "kanjinochikara://join?c=" + code;
+  }
+</script>
+</body>
+</html>
