@@ -17,24 +17,24 @@
   main{width:100%;max-width:420px;padding:32px 16px;text-align:center}
   .app{font-size:15px;color:var(--chalkFaded);margin:0 0 6px}
   h1{font-size:22px;margin:0 0 24px}
-  .label{font-size:13px;color:var(--chalkFaded);margin:0 0 8px}
-  .code{background:var(--chalk);color:var(--ink);border-radius:14px;padding:18px 0;margin:0 0 28px;
-        font:700 30px/1 ui-monospace,Menlo,monospace;letter-spacing:4px}
-  .btn{display:block;border-radius:999px;padding:16px;font-size:17px;font-weight:700;text-decoration:none;margin:0 0 12px}
+  .lead{font-size:15px;color:var(--chalkFaded);line-height:1.8;margin:0 0 24px}
+  .btn{display:block;border-radius:999px;padding:16px;font-size:17px;font-weight:700;text-decoration:none;margin:0 0 14px}
   .primary{background:var(--gold);color:var(--ink)}
-  .secondary{border:1.5px solid var(--chalkFaded);color:var(--chalk)}
-  .note{font-size:13px;color:var(--chalkFaded);line-height:1.8;margin:20px 0 0}
+  .note{font-size:14px;color:var(--chalk);line-height:1.8;margin:8px 0 32px}
+  .sub{font-size:13px;color:var(--chalkFaded);line-height:1.9;margin:0}
+  .sub .code{font:700 15px ui-monospace,Menlo,monospace;letter-spacing:2px;color:var(--chalk)}
+  .sub a{color:var(--chalkFaded)}
 </style>
 </head>
 <body>
 <main>
   <p class="app">漢字の力</p>
   <h1>部屋に招待されました</h1>
-  <p class="label">部屋コード</p>
-  <div class="code" id="code">------</div>
-  <a class="btn primary" id="open" href="kanjinochikara://join">アプリで開く</a>
-  <a class="btn secondary" href="https://apps.apple.com/jp/app/id6800003825">App Store で入手</a>
-  <p class="note">アプリを入れたあとは、もう一度このリンクを開くか、<br>「部屋に参加」で部屋コードを入力してください。</p>
+  <p class="lead">遊ぶにはアプリが必要です</p>
+  <a class="btn primary" href="https://apps.apple.com/jp/app/id6800003825">App Store で入手</a>
+  <p class="note">入れたら、もう一度このリンクを開いてください</p>
+  <p class="sub" id="codeLine" hidden>部屋コード <span class="code" id="code">------</span></p>
+  <p class="sub">アプリを入れているのに開かないときは <a id="open" href="kanjinochikara://join">アプリで開く</a></p>
 </main>
 <script>
   // 部屋コードに使う字だけを残す（アプリの RoomCode.alphabet と同じ）
@@ -44,6 +44,7 @@
   if (code.length === 6) {
     document.getElementById("code").textContent = code.slice(0, 3) + " " + code.slice(3);
     document.getElementById("open").href = "kanjinochikara://join?c=" + code;
+    document.getElementById("codeLine").hidden = false;
   }
 </script>
 </body>
